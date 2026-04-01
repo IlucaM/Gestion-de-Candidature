@@ -1,0 +1,23 @@
+import pino from 'pino';
+
+/**
+ * Logger structuré avec Pino
+ * Format JSON pour une meilleure intégration avec les outils de log
+ */
+
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true,
+      translateTime: 'SYS:standard',
+      ignore: 'pid,hostname',
+    },
+  },
+  base: {
+    env: process.env.NODE_ENV || 'development',
+  },
+});
+
+export default logger;
