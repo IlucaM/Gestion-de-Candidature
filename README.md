@@ -216,42 +216,16 @@ Comptes de test :
 - `POST /api/candidates/:id/validate` - Valider/rejeter un candidat (2s de délai)
 - `GET /api/candidates/stats` - Statistiques
 
-## 🚀 Déploiement
+## 🚀 Déploiement ce que j'ai fait étapes par étapes
 
-### Sur Render
+### Sur Render 
 
-1. Créer un compte sur [Render](https://render.com)
-2. Connecter votre repository GitHub
-3. Créer les services :
+1. Création d' un compte sur [Render]
+2. Connection avec Mon repository GitHub
+3. Création des services :
    - **Web Service** pour le backend
    - **Static Site** pour le frontend
    - **MongoDB** (managed ou external)
-
-4. Configurer les variables d'environnement
-
-### Variables d'Environnement
-
-#### Backend
-```env
-NODE_ENV=production
-PORT=3001
-MONGODB_URI=mongodb+srv://...
-JWT_SECRET=votre-secret-jwt
-JWT_EXPIRES_IN=24h
-FRONTEND_URL=https://votre-frontend.render.com
-```
-
-#### Frontend
-```env
-VITE_API_URL=https://votre-backend.render.com/api
-```
-
-## 📈 Monitoring
-
-- **Logs** : Pino (backend) avec format JSON
-- **Health Check** : Endpoint `/health`
-- **Couverture de code** : Codecov
-- **CI/CD** : GitHub Actions
 
 ## 🛡️ Sécurité
 
@@ -268,4 +242,4 @@ MIT
 
 ---
 
-**Développé avec ❤️ pour le Test 24h Full Stack & Test Engineer**
+**Développé Luca**
