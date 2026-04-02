@@ -11,15 +11,10 @@ import type {
 } from "./types";
 
 function resolveApiBase(): string {
-  const globalObject = globalThis as {
-    __VITE_API_URL__?: string;
-    process?: { env?: Record<string, string | undefined> };
-  };
+  // Vite remplace import.meta.env.VITE_API_URL au moment du build (production)
+  const fromVite = import.meta.env.VITE_API_URL;
 
-  const fromGlobal = globalObject.__VITE_API_URL__;
-  const fromNodeEnv = globalObject.process?.env?.VITE_API_URL;
-
-  return fromGlobal || fromNodeEnv || "http://localhost:3001/api";
+  return fromVite || "http://localhost:3001/api";
 }
 
 const API_BASE = resolveApiBase();
