@@ -71,12 +71,12 @@ function parseApiErrorBody(body: unknown): {
 
   const details = Array.isArray(b.errors)
     ? (b.errors.filter(
-        (e): e is ApiErrorItem =>
-          !!e &&
-          typeof e === "object" &&
-          typeof (e as Record<string, unknown>).path === "string" &&
-          typeof (e as Record<string, unknown>).message === "string",
-      ) as ApiErrorItem[])
+      (e): e is ApiErrorItem =>
+        !!e &&
+        typeof e === "object" &&
+        typeof (e as Record<string, unknown>).path === "string" &&
+        typeof (e as Record<string, unknown>).message === "string",
+    ) as ApiErrorItem[])
     : undefined;
 
   return { message, details };
@@ -103,9 +103,17 @@ async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
   }
 
   if (response.status === 401) {
+    if (path === "/auth/login") {
+      const { message, details } = parseApiErrorBody(body);
+      throw new ApiError(message || "Email ou mot de passe incorrect", {
+        status: 401,
+        details,
+      });
+    }
     clearToken();
     throw new SessionExpiredError();
   }
+
 
   const { message, details } = parseApiErrorBody(body);
 
@@ -153,9 +161,17 @@ async function requestJsonWithMeta<T>(
   }
 
   if (response.status === 401) {
+    if (path === "/auth/login") {
+      const { message, details } = parseApiErrorBody(body);
+      throw new ApiError(message || "Email ou mot de passe incorrect", {
+        status: 401,
+        details,
+      });
+    }
     clearToken();
     throw new SessionExpiredError();
   }
+
 
   const { message, details } = parseApiErrorBody(body);
 

@@ -24,7 +24,7 @@ const users: User[] = [
     id: '1',
     email: 'admin@test24h.com',
     // Mot de passe: Admin123!
-    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    password: '$2a$10$pPm2WHd9LFhN7eeltGg55eQ5A6aSkQhVGjdGHILFU4J5uwvs1EDB6',
     role: 'admin',
     firstName: 'Admin',
     lastName: 'Test24h',
@@ -33,7 +33,7 @@ const users: User[] = [
     id: '2',
     email: 'recruteur@test24h.com',
     // Mot de passe: Recruteur123!
-    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    password: '$2a$10$RJkkUim9iU8.NvNx34JMROStIy5EuGUSyQ826eZenMBfakpab9kjq',
     role: 'recruiter',
     firstName: 'Jean',
     lastName: 'Recruteur',
