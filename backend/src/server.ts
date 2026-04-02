@@ -26,6 +26,8 @@ const PORT = process.env.PORT ?? 3001;
 app.use(helmet());
 
 // Configuration CORS
+const normalizeUrl = (url: string): string => url.trim().replace(/\/+$/, '').toLowerCase();
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -43,8 +45,14 @@ app.use(
         return;
       }
 
-      // If FRONTEND_URL is configured, allow only that origin
-      if (configuredOrigin && origin === configuredOrigin) {
+      // Allow any onrender.com subdomain (Render deployments)
+      if (/^https:\/\/[a-zA-Z0-9-]+\.onrender\.com$/.test(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      // If FRONTEND_URL is configured, allow only that origin (normalized comparison)
+      if (configuredOrigin && normalizeUrl(origin) === normalizeUrl(configuredOrigin)) {
         callback(null, true);
         return;
       }
@@ -55,6 +63,7 @@ app.use(
         return;
       }
 
+      logger.warn({ origin, configuredOrigin }, 'Requête CORS bloquée');
       callback(new Error('Non autorisé par la politique CORS'));
     },
     credentials: true,
